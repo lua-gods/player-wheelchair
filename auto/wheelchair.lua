@@ -24,8 +24,8 @@ local SPEED = 1.2
 renderer:setRootRotationAllowed(false)
 
 local key = {
-	left = keybinds:fromVanilla("key.left"),
-	right = keybinds:fromVanilla("key.right"),
+	left = keybinds:fromVanilla("key.right"),
+	right = keybinds:fromVanilla("key.left"),
 	forward = keybinds:fromVanilla("key.forward"),
 	backward = keybinds:fromVanilla("key.back")
 }
