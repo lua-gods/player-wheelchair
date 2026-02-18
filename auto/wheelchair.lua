@@ -1,3 +1,16 @@
+
+
+if not silly then
+	printJson(toJson{
+		{
+			color="yellow",
+			text="[!] This avatar requires the Sillyplugin to work.\n check the README.md for instructions"
+		},
+	})
+	return
+end
+
+
 local Spring = require("lib.spring")
 
 local WHEEL_CHAIR = models.wheelchair
