@@ -1,7 +1,6 @@
 {
 	"author":"GNanimates",
-	"name": "GN's Avatar v4",
+	"name": "Wheelchair",
 	"color":"#5ac54f",
-	"autoScripts": ["main"],
-	"resources": ["*.nbs"]
+	"autoScripts": ["main"]
 }

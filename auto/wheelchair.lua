@@ -1,13 +1,14 @@
 
-
-if not silly then
-	printJson(toJson{
-		{
-			color="yellow",
-			text="[!] This avatar requires the Sillyplugin to work.\n check the README.md for instructions"
-		},
-	})
-	return
+if host:isHost() then
+	if not silly then
+		printJson(toJson{
+			{
+				color="yellow",
+				text="[!] This avatar requires the Sillyplugin to work.\n check the README.md for instructions"
+			},
+		})
+		return
+	end
 end
 
 
@@ -49,13 +50,13 @@ events.ENTITY_INIT:register(function ()
 	pos = player:getPos()
 end)
 
-function pings.moveLeft()
-	lwheel.target = lwheel.target - ROW
+function pings.moveLeft(speed)
+	lwheel.target = lwheel.target - ROW * speed
 	animations.wheelchair.lMove:stop():play()
 end
 
-function pings.moveRight()
-	rwheel.target = rwheel.target - ROW
+function pings.moveRight(speed)
+	rwheel.target = rwheel.target - ROW * speed
 	animations.wheelchair.rMove:stop():play()
 end
 
@@ -65,12 +66,12 @@ end
 
 
 key.left.press = function (modifiers, self)
-	pings.moveLeft()
+	pings.moveLeft(player:isSneaking() and 0.5 or 1)
 	return true
 end
 
 key.right.press = function (modifiers, self)
-	pings.moveRight()
+	pings.moveRight(player:isSneaking() and 0.5 or 1)
 	return true
 end
 
@@ -95,7 +96,7 @@ end)
 events.RENDER:register(function (delta, ctx, matrix)
 	if ctx == "RENDER" then
 		local trot = math.lerp(lrot, rot, delta)
-		WHEEL_CHAIR:setRot(0,math.deg(trot),0)
+		WHEEL_CHAIR:setRot(0,math.deg(trot),0):setPos(0,player:isCrouching() and 2.14 or 0,0)
 		LEFT_WHEEL:setRot(math.deg(lwheel.pos)*48,0,0)
 		RIGHT_WHEEL:setRot(math.deg(rwheel.pos)*48,0,0)
 	end
